@@ -218,6 +218,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activestorage
   bcrypt
   bootsnap (>= 1.4.4)
   byebug

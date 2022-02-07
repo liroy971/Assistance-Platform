@@ -1,11 +1,12 @@
 class User < ApplicationRecord
   has_secure_password
 
+  def self.from_token_request(request)
+      User.find_by(email: request.params[:auth][:email])
+  end
 has_one_attached :identity
 
-def self.from_token_request(request)
-    User.find_by(email: request.params[:auth][:email])
-end
+
 
 validates :first_name, presence: true
 validates :first_name, length: { minimum: 4, maximum: 24 }

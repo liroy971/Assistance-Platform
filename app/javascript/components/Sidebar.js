@@ -64,6 +64,18 @@ function Sidebar() {
                     </NavText>
                 </NavItem>
             </NavItem>
+            <NavItem eventKey="map">
+                <NavIcon>
+                <a href="/map">
+                    <i className="fa fa-globe" aria-hidden="true" style={{ fontSize: '1.75em' }} />
+                </a>
+                </NavIcon>
+                <NavText>
+                <a href="/map">
+                    Map
+                </a>
+                </NavText>
+            </NavItem>
         </SideNav.Nav>
     </SideNav>
 

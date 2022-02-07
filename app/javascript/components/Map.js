@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 function MapContainer(props) {
   const { userLat } = useContext(UserLatContext);
   const { userLng } = useContext(UserLngContext);
- 
-  const url = "https//localhost:3001.com/requests/";
+
+//  const url = "https//localhost:3001.com/requests/";
 
   let navigate = useNavigate();
 const currentUserLocation = {
@@ -29,7 +29,7 @@ console.log(currentUserLocation);
   }
   return (
     <>
-        <div className="page-main-ctn">
+        <div className="map-main-ctn">
         <Map
         google={props.google}
         zoom={14}

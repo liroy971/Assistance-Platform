@@ -1,33 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :patch]
+before_action :set_user, only: [:show, :edit, :update, :destroy, :patch]
     def index
-        @users = User.all
-           if @users
-              render json:{
+        @users = User.all.with_attached_identity
 
-                 user: @users
-
-               }
-          else
-              render json: {
-              status: 500,
-              errors: ['no users found']
-          }
-         end
+          render json:  @users
     end
       # GET /users/1
     def show
-      @user = User.find(params[:id])
-         if @user
-            render json: {
-            user: @user
-         }
-         else
-            render json: {
-            status: 500,
-            errors: ['user not found']
-          }
-         end
+        render json: @user
     end
     # GET /users/new
     def new
@@ -42,22 +22,17 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
           auth_token = Knock::AuthToken.new payload: { sub: @user.id }
-          format.json {
-            render json:{
-              user: @user,
-              token: auth_token,
-            }, status: :created
-            }
+          render json: {user: @user,token: auth_token,}, status: :created
 
         else
             puts @user.errors.full_messages, status: :unprocessable_entity
 
         end
     end
-    def update
+  def update
       @user.update(user_params)
-      @identity_url = rails_blob_path(@user.identity)
-      render json: {user: @user}
+      @identity_url = rails_representation_path(@user.identity)
+      render json: {user: @user, identity_url: @identity_url}
   end
     def destroy
         @user.destroy

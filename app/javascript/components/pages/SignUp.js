@@ -1,7 +1,7 @@
   import React, { useState, useContext } from 'react';
   import axios from 'axios';
   import {Link, useNavigate} from 'react-router-dom';
-  import { UserContext } from "../contexts/ContextFile";
+  import { UserContext, ErrorContext } from "../contexts/ContextFile";
   import { DirectUpload } from "@rails/activestorage";
 function SignUp() {
 
@@ -14,6 +14,7 @@ function SignUp() {
   const [adress, setAdress] = useState("");
   const [username, setUsername] = useState("");
   const [identity, setIdentity] = useState({});
+  let { error, setError } = useContext(ErrorContext);
   const navigate = useNavigate();
   const handleFirstName = (event) => {setFirstName(event.target.value)}
   const handleLastName = (event) => {setLastName(event.target.value)}
@@ -24,42 +25,21 @@ function SignUp() {
   const handleConfirm = (event) => {setPasswordConfirmation(event.target.value)}
   const handleIdentity = (event) => {setIdentity(event.target.files[0])}
 
-  const uploadFile = (file, user) => {
-    const upload = new DirectUpload(
-      file,
-      "http://localhost:3001/rails/active_storage/direct_uploads"
-    );
-    upload.create((blob) => {
-      console.log(user);
-      let res = axios
-        .patch(
-          `http://localhost:3001/users/${user.user.id}`,
-          {
-            auth: {
-              identity: blob.signed_id,
-            },
-          }
-        )
-        .then((response) => {
-          console.log("I got here");
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 3500);
-          history.push("/map");
-        })
-        .catch((error) => {
-          console.log("Error", error);
-        });
 
-      return res;
-    });
+  const  onSubmit = async (event) => {
+  //  event.preventDefault()
+
+  const data = {
+    first_name: firstName,
+    last_name: lastName,
+    adress: adress,
+    email: email,
+    password: password,
+    password_confirmation: passwordConfirmation,
   };
-
-  const  onSubmit = (event) => {
-    event.preventDefault()
-
-  let res = axios.post('http://localhost:3001/auth/signup', {
+  let res = await axios
+  .post('http://localhost:3001/auth/signup', {
     auth: {
       first_name: firstName,
       last_name: lastName,
@@ -69,32 +49,18 @@ function SignUp() {
       password_confirmation: passwordConfirmation,
     }})
       .then(response => {
-        console.log(response);
-      let data = {
-        email: email,
-        password: password
-      }
-      axios.post('http://localhost:3001/auth/signin', {
-        auth: {
-                  email: email,
-                  password: password,
-                }
-        })
+        setUserData({
+          token: response.data.token,
+          isLoggedIn: true,
+          user: data,
+        });
 
-          .then(response => {
-         uploadFile(identity, response.data);
-              setUserData({
-                token: response.data.jwt,
-                isLoggedIn: true,
-                user: data,
-              });
-              console.log('The user have been created and logged in',response);
-              console.log(identity, response.data);
-              localStorage.setItem("token", JSON.stringify(response.data.jwt));
-              localStorage.setItem("user", JSON.stringify(data));
-              navigate("/map");
-            })
-})
+        localStorage.setItem("token", JSON.stringify(response.data.token.token));
+        localStorage.setItem("user", JSON.stringify(data));
+console.log('The user have been created and logged in',response);
+//        navigate("/map");
+console.log(response.data);
+        })
       .catch(error => console.log('impossible', error))
 return res;
 }

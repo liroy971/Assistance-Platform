@@ -6562,7 +6562,7 @@
    position: fixed;
    top: 0;
    right: 0;
-   left: 0;
+   left: 64px;
    z-index: 1030;
  }
 
@@ -11442,7 +11442,7 @@
 
  .sb-topnav {
    height: 56px;
-   padding-left: 64px;
+   padding-left: 2%;
    z-index: 1039;
  }
  .sb-topnav .navbar-brand {
@@ -11725,6 +11725,24 @@
    border-radius: 0.25rem !important;
  }
  /*-----------------------------------------------------------------------------*/
+ .gm-fullscreen-control{
+   margin-top: 70px !important;
+ }
+ .gmnoprint[role=menubar]{
+   margin-top: 70px !important;
+   margin-left: 86px !important;
+ }
+ .gm-iv-container.gm-iv-small-container{
+   margin-top: 64px !important;
+   margin-left: 70px !important;
+ }
+ .gm-iv-address{
+   margin-top: 64px !important;
+ }
+ .gm-iv-address-link,.gm-iv-marker,.gm-iv-vertical-separator{
+   margin-top: 54px !important;
+ }
+
 a{
   outline: none;
   text-decoration: none;}
@@ -11733,10 +11751,9 @@ a{
    top: 0;
    bottom: 0;
    left: 0;
-   z-index: 1006;
+   z-index: 1040;
    min-width: 65px;
    background-color:#1d3446 !important;
-   margin-top: 56px !important;
    -webkit-transition: min-width 0.2s;
    -moz-transition: min-width 0.2s;
    -o-transition: min-width 0.2s;
@@ -11744,24 +11761,207 @@ a{
    transition: min-width 0.2s;
  }
 .page-main-ctn{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+  padding-top: 56px;
+  padding-left: 64px;
+  min-width: 315px;
+  height: 100%;
+  background-color: #f1f1f2;
+}
+#root{
+  height:100%
+}
+.map-main-ctn{
+  min-width: 310px;
+}
+/*HOME DASHBOARD -----------------------*/
+.dashboard-button-ctn{
+  display: flex;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.dashboard-button-ctn p{
+  display: flex;
+  align-items: center;
+}
+.dashboard-button-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+  padding:1%;
+  width:100%;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.1),
+  -1px 2px 10px rgba(255, 255, 255, 0.1) inset;
+}
+.block-1{width:33%;margin-right: 2%;}
+.block-2{width:30%;}
+
+.dashboard-button-block:hover {
+  cursor: pointer;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.2),
+  -1px 2px 10px rgba(255, 255, 255, 0.2) inset;
 }
 .home-test {
+  flex-direction: column;
   text-align:center;
+  height:100% !important;
+
 }
-.gm-fullscreen-control{
-  margin-top: 70px !important;
+.dashboard-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius:8px;
+  padding:2px;
+  margin:2%;
 }
-.gmnoprint[role=menubar]{
-  margin-top: 70px !important;
-  margin-left: 86px !important;
+.dashboard-main-ctn{
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #212529;
+height:100%;
+width: 68%;
+border-radius:10px;
+padding:2px;
+overflow: hidden;
+background-image: url("");
+background-size: cover;
 }
-.gm-iv-container.gm-iv-small-container{
-  margin-top: 64px !important;
-  margin-left: 70px !important;
+
+.dashboard-row{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height:100%;
+  margin: 2%;
 }
-.gm-iv-address{
-  margin-top: 64px !important;
+.dashboard-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:100%;
+  width: 30%;
 }
-.gm-iv-address-link,.gm-iv-marker,.gm-iv-vertical-separator{
-  margin-top: 54px !important;
+.dashboard-column-h{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48%;
+  padding:10%;
+  width: 100%;
+  background-color: white;
+  border-radius:10px;
+}
+.dashboard-counter-ctn{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.dashboard-counter-block{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3%;
+}
+.sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+  min-width: 180px !important;
+}
+.sidenav---sidenav-toggle---1KRjR {
+  width: 64px;
+  height: 55px !important;
+}
+.dashboard-row-h{
+  width:100%;
+  display:
+}
+
+.progress-circle{
+  position: relative;             /* pour servir de référent */
+  box-sizing: border-box;         /* prise en compte bordure dans la dimension */
+  font-size: 3em;                 /* pour définir les dimensions */
+  width: 1em;                     /* fixe la largeur */
+  height: 1em;                    /* fixe la hauteur */
+  border-radius: 50%;             /* rendu aspect circulaire */    /* couleur de fond de l'anneau */
+  background-color: #FFF;         /* couleur de fond de la progress bar */
+}
+.progress-circle:after {
+   /* récup. valeur de progression */
+  font-size: 0.30em;              /* taille de la font en % du parent */
+  height: 100%;                   /* centrage dans le parent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-counter-ctn:nth-child(1) .progress-circle-a {
+  border: .15em solid blue;
+}
+.progress-circle-unf{border: .15em solid #333030;}
+.progress-circle-unf:after{content: "7"; }
+.progress-circle-mat{border: .15em solid #CDE;}
+.progress-circle-mat:after{content: "3"; }
+.progress-circle-task{border: .15em solid #9b88bb;}
+.progress-circle-task:after{content: "4"; }
+.progress-circle-msg{border: .15em solid #7fb3a8;}
+.progress-circle-msg:after{content: "22"; }
+
+
+.progress-circle-a{
+  position: relative;             /* pour servir de référent */
+  box-sizing: border-box;         /* prise en compte bordure dans la dimension */
+  font-size: 6em;                 /* pour définir les dimensions */
+  width: 1em;                     /* fixe la largeur */
+  height: 1em;
+  border: .15em solid #1d3446;              /* fixe la hauteur */
+  border-radius: 50%;           /* couleur de fond de l'anneau */
+  background-color: #FFF;         /* couleur de fond de la progress bar */
+}
+.progress-circle-a:after {
+  content: "78%";  /* récup. valeur de progression */
+  font-size: 0.30em;              /* taille de la font en % du parent */
+  height: 100%;                   /* centrage dans le parent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cent-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 700px){
+  .dashboard-row{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:100%;
+    margin: 2%;
+  }
+  .dashboard-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+    width: 100%;
+  }
+  .dashboard-main-ctn{
+  width: 100%;
+  margin-bottom: 2%;
+  }
+  .dashboard-column-h{
+  margin-bottom: 2%;
+  height: 100%!important;
+  }
+  .dashboard-counter-ctn{
+  }
 }

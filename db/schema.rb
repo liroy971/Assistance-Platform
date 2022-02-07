@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_224119) do
+ActiveRecord::Schema.define(version: 2022_01_30_003629) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_224119) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", primary_key: "user_id", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -80,19 +80,11 @@ ActiveRecord::Schema.define(version: 2022_01_26_224119) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "avatar"
-    t.string "identity"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "conversations", "requests", primary_key: "request_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "conversations", "users", column: "receiver_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "conversations", "users", column: "sender_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "messages", "conversations", primary_key: "conversation_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "messages", "users", column: "receiver_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "messages", "users", column: "sender_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "requests", "conversations", primary_key: "conversation_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "requests", "users", column: "recipient_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "requests", "users", column: "requestor_id", primary_key: "user_id", on_update: :cascade, on_delete: :cascade
 end
